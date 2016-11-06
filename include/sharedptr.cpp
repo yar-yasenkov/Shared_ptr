@@ -124,7 +124,7 @@ void Shared_ptr<T>::reset()
 }
 
 template <typename T>
-T* shared_ptr<T>::operator ->() const 
+T* Shared_ptr<T>::operator ->() const 
 {
 	if (ptr == nullptr) 
 	{
@@ -134,7 +134,7 @@ T* shared_ptr<T>::operator ->() const
 }
 
 template <typename T>
-T& shared_ptr<T>::operator *() const
+T& Shared_ptr<T>::operator *() const
 {
 	if (ptr == nullptr) 
 	{
