@@ -23,12 +23,22 @@ SCENARIO("copy", "[COPY]")
   REQUIRE(sp2.use_count()==2);
 }
 
-SCENARIO("assign ", "[prisv1]"){
+SCENARIO("assign ", "[ASSIGN]")
+{
   shared_ptr<int> sp1(new int(10));
   shared_ptr<int> sp2; 
   sp2=sp1;
   REQUIRE(*sp2==10);
-  REQUIRE(sp2.countref()==2);
+  REQUIRE(sp2.use_count()==2);
 }
 
+SCENARIO("use_count", "[COUNT]")
+{
+   shared_ptr<int> sp1(new int(10));
+   shared_ptr<int> sp2=sp1;
+   shared_ptr<int> sp3;
+   sp3=sp1;
+   REQUIRE(sp1.use_count()==3);
+}
+  
   
