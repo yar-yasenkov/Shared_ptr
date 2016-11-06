@@ -123,21 +123,4 @@ void Shared_ptr<T>::reset()
 
 
 
-int _tmain(int argc, _TCHAR* argv[])
-{
-	Shared_ptr<int> p1(new int(9));
-	std::cout << "p1.use_count " << p1.use_count() << "\n";
-	std::cout << "p1.unique " << ((p1.unique()) ? "true" : "false") << "\n\n";
-	Shared_ptr<int> p2;
-	p2 = p1;
-	std::cout << "p1.unique " << ((p2.unique()) ? "true" : "false") << "\n\n";
-	std::cout << "p2.get " << *p2.get() << "\n\n";
-	if (p2)	std::cout << "p2.operator bool " << true << "\n\n";
-	std::cout << "p2.reset " << "\n\n";
-	p2.reset();
-	std::cout << "p1.get " << *p1.get() << "\n\n";
-	std::cout << "p1.unique " << ((p1.unique()) ? "true" : "false") << "\n\n";
-	system("pause");
-	return 0;
-}
 
