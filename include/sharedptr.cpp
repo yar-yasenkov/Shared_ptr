@@ -20,6 +20,8 @@ public:
 	T* get() const;
 	operator bool();
 	void reset();
+	T* operator ->() const; /*strong*/
+	T& operator *() const; /*strong*/
 
 private:
 	T* ptr;
@@ -121,6 +123,25 @@ void Shared_ptr<T>::reset()
 	(*count)--;
 }
 
+template <typename T>
+T* shared_ptr<T>::operator ->() const 
+{
+	if (ptr == nullptr) 
+	{
+	   throw ("nullptr");
+	}
+	return ptr;
+}
+
+template <typename T>
+T& shared_ptr<T>::operator *() const
+{
+	if (ptr == nullptr) 
+	{
+           throw ("nullptr");
+	}
+	return *ptr;
+}
 
 
 
