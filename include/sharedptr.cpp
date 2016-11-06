@@ -14,7 +14,7 @@ public:
 	Shared_ptr(const Shared_ptr<T>& src);
 	Shared_ptr(Shared_ptr<T>&&);
 	Shared_ptr<T> operator= (Shared_ptr<T>& other);
-	Shared_ptr& operator = (Shared_ptr<T>&&); /*noexcept*/
+	Shared_ptr<T>& operator = (Shared_ptr<T>&&); /*noexcept*/
 	~Shared_ptr();
 	
 	bool unique() const;
@@ -81,7 +81,7 @@ Shared_ptr<T> Shared_ptr<T>::operator= (Shared_ptr<T>& other)
 }
 
 template <typename T>
-Shared_ptr& Shared_ptr<T>::operator = (Shared_ptr<T>&& other)
+Shared_ptr<T>& Shared_ptr<T>::operator = (Shared_ptr<T>&& other)
 {
 	if (this != &other) this->swap(other);
 	return *this;
