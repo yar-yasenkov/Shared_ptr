@@ -12,7 +12,9 @@ public:
 	Shared_ptr();
 	Shared_ptr(T* pointer);
 	Shared_ptr(const Shared_ptr<T>& src);
+	Shared_ptr(Shared_ptr&&);
 	Shared_ptr<T> operator= (Shared_ptr<T>& other);
+	Shared_ptr& operator = (Shared_ptr&&); /*noexcept*/
 	~Shared_ptr();
 	
 	bool unique() const;
@@ -22,7 +24,7 @@ public:
 	void reset();
 	T* operator ->() const; /*strong*/
 	T& operator *() const; /*strong*/
-        void swap(shared_ptr&);
+        void swap(Shared_ptr&);
 private:
 	T* ptr;
 	size_t* count;
@@ -48,6 +50,13 @@ Shared_ptr<T>::Shared_ptr(const Shared_ptr<T>& src) : ptr(src.ptr), count(src.co
 	(*count)++;
 }
 
+template <typename T>
+Shared_ptr<T>::Shared_ptr(Shared_ptr&& src) : ptr(src.ptr), count(src.count)
+{
+	src.ptr = nullptr;
+	src.count = nullptr;
+}
+
 template <class T>
 Shared_ptr<T> Shared_ptr<T>::operator= (Shared_ptr<T>& other)
 {
@@ -68,6 +77,13 @@ Shared_ptr<T> Shared_ptr<T>::operator= (Shared_ptr<T>& other)
 		count = other.count;
 		(*count)++;
 	}
+	return *this;
+}
+
+template <typename T>
+Shared_ptr& Shared_ptr<T>::operator = (Shared_ptr&& other)
+{
+	if (this != &other) this->swap(other);
 	return *this;
 }
 
