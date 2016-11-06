@@ -41,4 +41,11 @@ SCENARIO("use_count", "[COUNT]")
    REQUIRE(sp1.use_count()==3);
 }
   
+SCENARIO("make_shared", "[MAKE]")
+{
+  Shared_ptr sp =  make_shared<int>(5);
+  REQUIRE(*sp==5);
+  REQUIRE(sp.use_count()==1);
+}
+
   
