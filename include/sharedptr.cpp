@@ -9,22 +9,22 @@ template <class T>
 class Shared_ptr
 {
 public:
-	Shared_ptr();
-	Shared_ptr(T* pointer);
-	Shared_ptr(const Shared_ptr<T>& src);
-	Shared_ptr(Shared_ptr<T>&&);
-	Shared_ptr<T> operator= (Shared_ptr<T>& other);
-	Shared_ptr<T>& operator = (Shared_ptr<T>&&); /*noexcept*/
-	~Shared_ptr();
+	Shared_ptr();/*noexcept*/
+	Shared_ptr(T* pointer);/*noexcept*/
+	Shared_ptr(const Shared_ptr<T>& src);/*noexcept*/
+	Shared_ptr(Shared_ptr<T>&& src);/*noexcept*/
+	Shared_ptr<T> operator= (Shared_ptr<T>& other);/*strong*/
+	Shared_ptr<T>& operator= (Shared_ptr<T>&& other); /*strong*/
+	~Shared_ptr();/*strong*/
 	
-	bool unique() const;
-	size_t use_count() const;
-	T* get() const;
-	operator bool();
-	void reset();
+	bool unique() const;/*strong*/
+	size_t use_count() const;/*noexcept*/
+	T* get() const;/*noexcept*/
+	operator bool();/*noexcept*/
+	void reset();/*noexcept*/
 	T* operator ->() const; /*strong*/
 	T& operator *() const; /*strong*/
-        void swap(Shared_ptr<T>&);
+        void swap(Shared_ptr<T>&);/*noexcept*/
 private:
 	T* ptr;
 	size_t* count;
@@ -83,7 +83,7 @@ Shared_ptr<T> Shared_ptr<T>::operator= (Shared_ptr<T>& other)
 template <typename T>
 Shared_ptr<T>& Shared_ptr<T>::operator = (Shared_ptr<T>&& other)
 {
-	if (this != &other) this->swap(other);
+	if (this != &other) this->swap(other); 
 	return *this;
 }
 
@@ -135,7 +135,7 @@ void Shared_ptr<T>::reset()
 		delete ptr;
 		delete count;
 	}
-    ptr = nullptr;
+        ptr = nullptr;
 	(*count)--;
 }
 
