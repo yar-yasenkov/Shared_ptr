@@ -43,7 +43,7 @@ SCENARIO("use_count", "[COUNT]")
   
 SCENARIO("make_shared", "[MAKE]")
 {
-  Shared_ptr sp =  make_shared<int>(5);
+  Shared_ptr<int> sp =  make_shared<int>(5);
   REQUIRE(*sp==5);
   REQUIRE(sp.use_count()==1);
 }
