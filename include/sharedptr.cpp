@@ -22,7 +22,7 @@ public:
 	void reset();
 	T* operator ->() const; /*strong*/
 	T& operator *() const; /*strong*/
-
+        void swap(shared_ptr&);
 private:
 	T* ptr;
 	size_t* count;
@@ -123,7 +123,7 @@ void Shared_ptr<T>::reset()
 	(*count)--;
 }
 
-template <typename T>
+template <class T>
 T* Shared_ptr<T>::operator ->() const 
 {
 	if (ptr == nullptr) 
@@ -133,7 +133,7 @@ T* Shared_ptr<T>::operator ->() const
 	return ptr;
 }
 
-template <typename T>
+template <class T>
 T& Shared_ptr<T>::operator *() const
 {
 	if (ptr == nullptr) 
@@ -143,5 +143,11 @@ T& Shared_ptr<T>::operator *() const
 	return *ptr;
 }
 
+template <class T>
+void Shared_ptr<T>::swap(Shared_ptr& other)
+{
+	std::swap(ptr, other.ptr);
+	std::swap(count, other.count);
+}
 
 
