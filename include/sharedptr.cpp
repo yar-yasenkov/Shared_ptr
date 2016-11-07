@@ -120,13 +120,13 @@ Shared_ptr<T>::operator bool()
 template <class T>
 void Shared_ptr<T>::reset()
 {
-	if ((ptr != nullptr) && ( *count == 1))
+	if ((ptr != nullptr) && ( --(*count) == 0))
 	{
 		delete ptr;
 		delete count;
 	}
         ptr = nullptr;
-	--(*count);
+	//--(*count);
 }
 
 template <class T>
