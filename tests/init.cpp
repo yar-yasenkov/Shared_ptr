@@ -48,4 +48,9 @@ SCENARIO("make_shared", "[MAKE]")
   REQUIRE(sp.use_count()==1);
 }
 
-  
+  SCENARIO("copy_null", "[CPYTEST]")
+{
+  shared_ptr<size_t> p1; 
+  shared_ptr<size_t> p2 {p1};
+  REQUIRE(sp.use_count()==0);
+}
