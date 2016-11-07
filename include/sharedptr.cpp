@@ -47,7 +47,10 @@ Shared_ptr<T>::Shared_ptr(T* pointer) : ptr(pointer), count(new size_t(1))
 template <class T>
 Shared_ptr<T>::Shared_ptr(const Shared_ptr<T>& src) : ptr(src.ptr), count(src.count)
 {
-	(*count)++;
+	if (src.ptr != nullptr)
+	{
+	    (*count)++;
+	}
 }
 
 template <typename T>
@@ -123,7 +126,7 @@ void Shared_ptr<T>::reset()
 		delete count;
 	}
         ptr = nullptr;
-	(*count)--;
+	--(*count);
 }
 
 template <class T>
