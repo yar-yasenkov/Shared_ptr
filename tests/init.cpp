@@ -50,7 +50,7 @@ SCENARIO("make_shared", "[MAKE]")
 
   SCENARIO("copy_null", "[CPYTEST]")
 {
-  shared_ptr<size_t> p1; 
-  shared_ptr<size_t> p2 {p1};
+  Shared_ptr<size_t> p1; 
+  Shared_ptr<size_t> p2 {p1};
   REQUIRE(p2.use_count()==0);
 }
