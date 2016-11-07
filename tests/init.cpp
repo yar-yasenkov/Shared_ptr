@@ -52,5 +52,5 @@ SCENARIO("make_shared", "[MAKE]")
 {
   shared_ptr<size_t> p1; 
   shared_ptr<size_t> p2 {p1};
-  REQUIRE(sp.use_count()==0);
+  REQUIRE(p2.use_count()==0);
 }
