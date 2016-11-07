@@ -49,7 +49,7 @@ Shared_ptr<T>::Shared_ptr(const Shared_ptr<T>& src) : ptr(src.ptr), count(src.co
 {
 	if (src.ptr != nullptr)
 	{
-	    (*count)++;
+	    ++(*count);
 	}
 }
 
@@ -122,8 +122,6 @@ void Shared_ptr<T>::reset()
 {
 	if ((ptr != nullptr) && ( --(*count) == 0))
 	{
-		//delete ptr;
-		//delete count;
 		delete this;
 	}
         ptr = nullptr;
