@@ -120,11 +120,6 @@ Shared_ptr<T>::operator bool()
 template <class T>
 void Shared_ptr<T>::reset()
 {
-	//if ((ptr != nullptr) && ( --(*count) == 0))
-	//{
-	//	delete this;
-	//}
-        //ptr = nullptr;
 	this->swap(Shared_ptr());
 }
 
