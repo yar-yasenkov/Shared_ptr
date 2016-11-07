@@ -122,11 +122,11 @@ void Shared_ptr<T>::reset()
 {
 	if ((ptr != nullptr) && ( --(*count) == 0))
 	{
-		delete ptr;
-		delete count;
+		//delete ptr;
+		//delete count;
+		delete this;
 	}
         ptr = nullptr;
-	//--(*count);
 }
 
 template <class T>
