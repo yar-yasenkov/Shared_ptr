@@ -10,14 +10,14 @@ class Shared_ptr
 {
 public:
 	Shared_ptr();/*noexcept*/
-	Shared_ptr(T* pointer);/*noexcept*/
+	Shared_ptr(T* pointer);/*strong*/
 	Shared_ptr(const Shared_ptr<T>& src);/*noexcept*/
 	Shared_ptr(Shared_ptr<T>&& src);/*noexcept*/
 	Shared_ptr<T> operator= (Shared_ptr<T>& other);/*strong*/
 	Shared_ptr<T>& operator= (Shared_ptr<T>&& other); /*strong*/
-	~Shared_ptr();/*strong*/
+	~Shared_ptr();/*noexcept*/
 	
-	bool unique() const;/*strong*/
+	bool unique() const;/*noexcept*/
 	size_t use_count() const;/*noexcept*/
 	T* get() const;/*noexcept*/
 	operator bool();/*noexcept*/
@@ -62,20 +62,7 @@ Shared_ptr<T> Shared_ptr<T>::operator= (Shared_ptr<T>& other)
 {
 	if (this != &other)
 	{
-		if (count) {
-			if (*count == 1)
-			{
-				delete ptr;
-				delete count;
-			}
-			else
-			{
-				*count--;
-			}
-		}
-		ptr = other.ptr;
-		count = other.count;
-		(*count)++;
+		Shared_ptr(other).swap(*this);
 	}
 	return *this;
 }
@@ -94,15 +81,15 @@ Shared_ptr<T>::~Shared_ptr(){
 			delete count;
 			delete ptr;
 		}
-		else (*count)--;
+		else --(*count);
 	}
 }
 
 template <class T>
 bool Shared_ptr<T>::unique() const
 {
-	if (count == nullptr)
-		throw "nullptr";
+	if (count == nulptr)
+		return (false)
 	return (*count == 1);
 }
 
