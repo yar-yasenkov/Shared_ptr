@@ -89,7 +89,7 @@ template <class T>
 bool Shared_ptr<T>::unique() const
 {
 	if (count == nulptr)
-		return (false)
+		return (false);
 	return (*count == 1);
 }
 
